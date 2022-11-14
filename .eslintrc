@@ -1,0 +1,55 @@
+{
+  "extends": [
+    "airbnb-typescript",
+    "prettier/@typescript-eslint",
+    "prettier/react"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prettier", "jest"],
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "directory": [
+          "./tsconfig.json",
+          "./client/tsconfig.json",
+          "./crawler/tsconfig.json"
+        ]
+      }
+    }
+  },
+  "rules": {
+    "arrow-body-style": "off",
+    "arrow-parens": "off",
+    "class-methods-use-this": "off",
+    "no-useless-constructor": "off",
+    "object-curly-newline": "off",
+    "prettier/prettier": "warn",
+    "import/prefer-default-export": ["off"],
+    "import/no-extraneous-dependencies": [
+      "error",
+      { "devDependencies": ["**/*.test.{ts,tsx}", "**/*.spec.{ts,tsx}", "**/*.e2e-spec.{ts,tsx}"] }
+    ],
+    "react/prop-types": ["off"],
+    "react/jsx-filename-extension": ["off"],
+    "react/jsx-curly-brace-presence": ["off"],
+    "react/jsx-closing-bracket-location": [
+      "warn",
+      { "nonEmpty": "after-props" }
+    ],
+    "jsx-a11y/label-has-associated-control": ["off"],
+    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/interface-name-prefix": "off"
+  },
+  "env": {
+    "node": true,
+    "browser": true,
+    "jest": true
+  }
+}

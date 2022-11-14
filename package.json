@@ -1,0 +1,85 @@
+{
+  "private": true,
+  "name": "vethyl",
+  "version": "0.1.0",
+  "description": "Project vethyl monorepo -- ETH query system",
+  "repository": "darekaze/vethyl",
+  "author": "@DaRekaze",
+  "license": "BSD-2-Clause",
+  "scripts": {
+    "_build": "yarn workspaces run build",
+    "test": "jest",
+    "lint": "eslint . --ext .js,.ts,.tsx",
+    "ws:client": "yarn workspace @vethyl/client",
+    "ws:api": "yarn workspace @vethyl/api",
+    "ws:crawler": "yarn workspace @vethyl/crawler",
+    "ws:fgptr": "yarn workspace @vethyl/fgptr",
+    "dev:client": "yarn workspace @vethyl/client start",
+    "dev:api": "yarn workspace @vethyl/api start",
+    "dev:crawler": "yarn workspace @vethyl/crawler dev",
+    "dev:fgptr": "yarn workspace @vethyl/fgptr dev",
+    "compose": "docker-compose up -d",
+    "build:api": "docker-compose build api",
+    "build:crawler": "docker-compose build crawler",
+    "build:fgptr": "docker-compose build fgptr",
+    "deploy": "docker stack deploy --compose-file=docker-compose.yml prod",
+    "stopall": "docker stack rm prod",
+    "rmi": "docker rmi $(docker images -q --filter \"dangling=true\")"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.26.0",
+    "@typescript-eslint/parser": "^2.26.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-typescript": "^6.3.2",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-import-resolver-typescript": "^2.0.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jest": "^23.8.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "husky": "^4.2.3",
+    "jest": "24.9.0",
+    "lint-staged": "^10.1.1",
+    "prettier": "^2.0.2",
+    "ts-jest": "24.3.0",
+    "typescript": "~3.8.3"
+  },
+  "jest": {
+    "projects": [
+      "common",
+      "client",
+      "crawler",
+      "api",
+      "fgptr"
+    ]
+  },
+  "prettier": {
+    "printWidth": 85,
+    "semi": false,
+    "singleQuote": true,
+    "jsxBracketSameLine": true,
+    "trailingComma": "all",
+    "endOfLine": "lf"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "workspaces": [
+    "common",
+    "client",
+    "crawler",
+    "api",
+    "fgptr"
+  ]
+}
